@@ -22,7 +22,7 @@ public class Main {
         boolean program=true;
         
         while (program==true) {
-            
+            System.out.println("");
             System.out.println("Menú");
             System.out.println("1) Conectarse como Comprador");
             System.out.println("2) Conectarse como Vendedor");
@@ -34,9 +34,28 @@ public class Main {
             int op = s.nextInt();
             if (op==1) {
                 System.out.println("Se ha conectado como comprador");
+                int n=-1;
+                while (n<0) {
+                    System.out.print("Ingrese el número de la posición de la lista de artículos para pujar por dicho artículo: ");
+                    n= s.nextInt();
+                    if (n<0) {
+                        System.out.println("Número inválido. Intente nuevamente");
+                    }
+                    else {
+                        System.out.println("Usted ha pujado por el artículo " + subasta.get(n).getNombre());
+                        subasta.get(n).pujas++;
+                    }
+                }
             }
             else if (op==2) {
                 System.out.println("Se ha conectado como Vendedor");
+                System.out.print("Ingrese el nombre del artículo: ");
+                String nom= s.nextLine();
+                System.out.print("Ingrese el precio del artículo: ");
+                int p= s.nextInt();
+                Artículo nuevo = new Artículo (p, nom, 0);
+                subasta.add(nuevo);
+                System.out.println("Artículo añadido con éxito a la subasta!!");
             }
             else if (op==3) {
                 System.out.println("Se ha conectado como Observador");
