@@ -1,5 +1,7 @@
 package casasubasta;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -10,6 +12,30 @@ public class Main {
     
     public static void main(String[] args) {
        
+        ArrayList<Artículo> subasta = new ArrayList<>();
+        Scanner s = new Scanner(System.in);
+        boolean program=true;
+        
+        while (program==true) {
+            
+            System.out.println("Menú");
+            System.out.println("1) Conectarse como Comprador");
+            System.out.println("2) Conectarse como Vendedor");
+            System.out.println("3) Conectarse como Observador");
+            System.out.println("Ingrese 0 para salir del programa");
+            
+            System.out.print("Ingrese un número: ");
+            
+            int op = s.nextInt();
+            
+            if (op==0) {
+                program=false;
+            }
+            
+            
+            
+            
+        }
     }
     
 }
