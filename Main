@@ -12,7 +12,12 @@ public class Main {
     
     public static void main(String[] args) {
        
-        ArrayList<Artículo> subasta = new ArrayList<>();
+       ArrayList<Artículo> subasta = new ArrayList<>();
+        Artículo a= new Artículo(3000, "Vaso de plata", 2);
+        subasta.add(a);
+        a= new Artículo(10000, "Celular viejo", 3);
+        subasta.add(a);
+        
         Scanner s = new Scanner(System.in);
         boolean program=true;
         
@@ -32,6 +37,21 @@ public class Main {
             }
             else if (op==2) {
                 System.out.println("Se ha conectado como Vendedor");
+            }
+            else if (op==3) {
+                System.out.println("Se ha conectado como Observador");
+                int n=-1;
+                while (n<0) {
+                    System.out.print("Ingrese el número de la posición de la lista de artículos para consultar dicho artículo: ");
+                    n= s.nextInt();
+                    if (n<0) {
+                        System.out.println("Número inválido. Intente nuevamente");
+                    }
+                    else {
+                        System.out.println("Nombre:  " + subasta.get(n).getNombre() + "  Precio:  " + subasta.get(n).getPrecio() + "  Numero de pujas: " + subasta.get(n).pujas);
+                    }
+                }
+                
             }
             else if (op==0) {
                 program=false;
