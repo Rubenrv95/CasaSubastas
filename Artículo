@@ -8,6 +8,7 @@ package casasubasta;
 public class Artículo {
     int precio;
     String nombre;
+    int pujas;
 
     public Artículo(int precio, String nombre) {
         this.precio = precio;
