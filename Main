@@ -27,9 +27,17 @@ public class Main {
             System.out.print("Ingrese un número: ");
             
             int op = s.nextInt();
-            
-            if (op==0) {
+            if (op==1) {
+                System.out.println("Se ha conectado como comprador");
+            }
+            else if (op==2) {
+                System.out.println("Se ha conectado como Vendedor");
+            }
+            else if (op==0) {
                 program=false;
+            }
+            else {
+                System.out.println("Numero inválido. Intente nuevamente");
             }
             
             
