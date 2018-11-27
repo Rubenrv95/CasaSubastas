@@ -1,0 +1,15 @@
+package casasubasta;
+
+
+/**
+ *
+ * @author Rubén
+ */
+public class Main {
+
+    
+    public static void main(String[] args) {
+       
+    }
+    
+}
