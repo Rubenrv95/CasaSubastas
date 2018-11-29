@@ -12,13 +12,29 @@ public class Main {
     
     public static void main(String[] args) {
        
-       ArrayList<Artículo> subasta = new ArrayList<>();
-        Artículo a= new Artículo(3000, "Vaso de plata", 2);
+        ArrayList<Artículo> subasta = new ArrayList<>();
+        ArrayList<Vendedor> vendedores = new ArrayList<>();
+        ArrayList<Comprador> compradores = new ArrayList<>();
+        
+        Vendedor v= new Vendedor("Admin");
+        vendedores.add(v);
+        Comprador c = new Comprador("Admin");
+        compradores.add(c);
+        
+        ArrayList<String> aux = new ArrayList<>();
+        aux.add("Vicente");
+        aux.add("Daniel");
+        Artículo a= new Artículo(3000, "Vaso de plata", aux);
         subasta.add(a);
-        a= new Artículo(10000, "Celular viejo", 3);
+        aux = new ArrayList<>();
+        aux.add("Juan");
+        aux.add("Daniel");
+        aux.add("Raul");
+        a= new Artículo(10000, "Celular viejo", aux);
         subasta.add(a);
         
         Scanner s = new Scanner(System.in);
+        Scanner l = new Scanner(System.in);
         boolean program=true;
         
         while (program==true) {
@@ -27,35 +43,72 @@ public class Main {
             System.out.println("1) Conectarse como Comprador");
             System.out.println("2) Conectarse como Vendedor");
             System.out.println("3) Conectarse como Observador");
+            System.out.println("4) Registrarse como Comprador");
+            System.out.println("5) Registrarse como Vendedor");
             System.out.println("Ingrese 0 para salir del programa");
             
             System.out.print("Ingrese un número: ");
             
             int op = s.nextInt();
             if (op==1) {
-                System.out.println("Se ha conectado como comprador");
-                int n=-1;
-                while (n<0) {
-                    System.out.print("Ingrese el número de la posición de la lista de artículos para pujar por dicho artículo: ");
-                    n= s.nextInt();
-                    if (n<0) {
-                        System.out.println("Número inválido. Intente nuevamente");
-                    }
-                    else {
-                        System.out.println("Usted ha pujado por el artículo " + subasta.get(n).getNombre());
-                        subasta.get(n).pujas++;
+                System.out.print("Ingrese su nombre de usuario de Comprador: ");
+                String name= l.nextLine();
+                boolean b = false;
+                Comprador aux_c = new Comprador(null);
+                for (Comprador co: compradores) {
+                    if (co.getNombre().equals(name)) {
+                        b=true;
+                        aux_c= co;
+                        break;
                     }
                 }
+                if (b==false) {
+                    System.out.println("El nombre de usuario no existe. Intente de nuevo");
+                }
+                else {
+                    System.out.println("Se ha conectado como comprador");
+                    int n=-1;
+                    while (n<0) {
+                        System.out.print("Ingrese el número de la posición de la lista de artículos para pujar por dicho artículo: ");
+                        n= s.nextInt();
+                        if (n<0) {
+                            System.out.println("Número inválido. Intente nuevamente");
+                        }
+                        else {
+                            System.out.println("Usted ha pujado por el artículo " + subasta.get(n).getNombre());
+                            subasta.get(n).getPujas().add(aux_c.getNombre());
+                        }
+                    }
+                }
+                
             }
             else if (op==2) {
-                System.out.println("Se ha conectado como Vendedor");
-                System.out.print("Ingrese el nombre del artículo: ");
-                String nom= s.nextLine();
-                System.out.print("Ingrese el precio del artículo: ");
-                int p= s.nextInt();
-                Artículo nuevo = new Artículo (p, nom, 0);
-                subasta.add(nuevo);
-                System.out.println("Artículo añadido con éxito a la subasta!!");
+                System.out.print("Ingrese su nombre de usuario de Vendedor: ");
+                String name= l.nextLine();
+                boolean b = false;
+                Vendedor aux_v = new Vendedor(null);
+                for (Vendedor co: vendedores) {
+                    if (co.getNombre().equals(name)) {
+                        b=true;
+                        aux_v= co;
+                        break;
+                    }
+                }
+                if (b==false) {
+                    System.out.println("El nombre de usuario no existe. Intente de nuevo");
+                }
+                else {
+                    System.out.println("Se ha conectado como Vendedor");
+                    System.out.println("");
+                    System.out.print("Ingrese el nombre del artículo: ");
+                    String nom= s.nextLine();
+                    System.out.print("Ingrese el precio del artículo: ");
+                    int p= s.nextInt();
+                    Artículo nuevo = new Artículo (p, nom, new ArrayList<String>());
+                    subasta.add(nuevo);
+                    System.out.println("Artículo añadido con éxito a la subasta!!");
+                }
+                
             }
             else if (op==3) {
                 System.out.println("Se ha conectado como Observador");
@@ -67,10 +120,55 @@ public class Main {
                         System.out.println("Número inválido. Intente nuevamente");
                     }
                     else {
-                        System.out.println("Nombre:  " + subasta.get(n).getNombre() + "  Precio:  " + subasta.get(n).getPrecio() + "  Numero de pujas: " + subasta.get(n).pujas);
+                        System.out.println("Nombre:  " + subasta.get(n).getNombre() + "  Precio:  " + subasta.get(n).getPrecio());
+                        int i=0;
+                        System.out.println("Lista de pujadores: ");
+                        while (i<subasta.get(n).getPujas().size()) {
+                            System.out.println(subasta.get(n).getPujas().get(i));
+                            i++;
+                        }
                     }
                 }
                 
+            }
+            else if (op==4) {
+                System.out.print("Ingrese su nombre de usuario de Comprador: ");
+                String name = l.nextLine();
+                boolean b = true;
+                for (Comprador co: compradores) {
+                    if (co.getNombre().equals(name)) {
+                        b=false;
+                        break;
+                    }
+                }
+                if (b==false) {
+                    System.out.println("El nombre de usuario ya está registrado, intente de nuevo");
+                }
+                else {
+                    System.out.println("Usuario registrado con éxito!!");
+                    compradores.add(new Comprador(name));
+                }
+             
+            }
+            else if (op==5) {
+                System.out.print("Ingrese su nombre de usuario de Vendedor: ");
+                String name = l.nextLine();
+                boolean b = true;
+                for (Vendedor co: vendedores) {
+                    if (co.getNombre().equals(name)) {
+                        b=false;
+                        break;
+                    }
+                }
+                if (b==false) {
+                    System.out.println("");
+                    System.out.println("El nombre de usuario ya está registrado, intente de nuevo");
+                    System.out.println("");
+                }
+                else {
+                    System.out.println("Usuario registrado con éxito!!");
+                    vendedores.add(new Vendedor(name));
+                }
             }
             else if (op==0) {
                 program=false;
