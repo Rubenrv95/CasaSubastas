@@ -1,5 +1,6 @@
-
 package casasubasta;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -8,13 +9,16 @@ package casasubasta;
 public class Artículo {
     int precio;
     String nombre;
-    int pujas;
+    ArrayList<String> pujas;
 
-    public Artículo(int precio, String nombre, int pujas) {
+    public Artículo(int precio, String nombre, ArrayList<String> pujas) {
         this.precio = precio;
         this.nombre = nombre;
         this.pujas = pujas;
     }
+
+    
+    
 
     public int getPrecio() {
         return precio;
@@ -30,6 +34,14 @@ public class Artículo {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public ArrayList<String> getPujas() {
+        return pujas;
+    }
+
+    public void setPujas(ArrayList<String> pujas) {
+        this.pujas = pujas;
     }
     
     
